@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cam Girl Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Great+Vibes&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  html {
+  scroll-behavior: smooth;
+}
+
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #999;
+    color: #fff;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
+    background: linear-gradient(90deg, #000, rgba(0,0,0,0.85));
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .logo {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    background: linear-gradient(45deg, #ff3b81, #ffcd00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 8px rgba(255, 59, 129, 0.4);
+    letter-spacing: 2px;
+    flex: 1;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: #ff3b81;
+    transition: width 0.3s ease;
+  }
+  nav a:hover {
+    color: #ff3b81;
+  }
+  nav a:hover::after {
+    width: 100%;
+  }
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    nav a {
+      font-size: 0.95rem;
+    }
+  }
+  .hero {
+    background-color: #000;
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .hero-text {
+    flex: 1;
+    min-width: 300px;
+    padding: 1rem;
+  }
+  .hero-text h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 4rem;
+    margin: 0 0 1rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  .cta {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 2px solid white;
+    padding-bottom: 0.2rem;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .cta:hover {
+    color: #ff3b81;
+    border-color: #ff3b81;
+  }
+  .hero-image {
+    flex: 1;
+    min-width: 280px;
+    min-height: 700px;
+    position: relative;
+    padding: 2rem;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url(main.jpg)
+                center center/cover no-repeat;
+  }
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .bubble-list {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 1rem;
+    column-gap: 1rem;
+    align-content: center;
+    width: 100%;
+    max-width: 540px;
+    margin: auto;
+  }
+  .bubble {
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+    white-space: nowrap;
+    backdrop-filter: blur(2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  }
+  .bubble:hover { transform: translateY(-2px) scale(1.06); }
+  .bubble:nth-child(odd) { justify-self: start; }
+  .bubble:nth-child(even) { justify-self: end; }
+  .teal { background-color: #00c2a8; }
+  .yellow { background-color: #ffcd00; }
+  .pink { background-color: #ff3b81; }
+  .orange { background-color: #ff6a00; }
+  .green { background-color: #8bc34a; }
+  @media (max-width: 768px) {
+    .hero { flex-direction: column; }
+    .hero-text h1 { font-size: 2.5rem; }
+    .hero-image { min-height: 560px; padding: 1.25rem; }
+    .bubble-list { grid-template-columns: 1fr; max-width: 100%; row-gap: 0.75rem; }
+    .bubble:nth-child(odd) { justify-self: start; margin-left: 0.5rem; }
+    .bubble:nth-child(even) { justify-self: end; margin-right: 0.5rem; }
+  }
+  .gallery {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url(bg1.jpg)
+                center center/cover no-repeat;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  .gallery h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #ff3b81;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+  .gallery-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 3px solid #ff3b81;
+    box-shadow: 0 4px 20px rgba(255, 59, 129, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .gallery-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(255, 59, 129, 0.8);
+  }
+  
+  /* .section-title { font-family: 'Anton', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; color: #ff3b81; text-align: center; text-shadow: 2px 2px 6px rgba(0,0,0,0.7); letter-spacing: 1px; } */
+  .section-title { font-family: 'Anton', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; color: #ff3b81; text-align: center; text-shadow: 2px 2px 6px rgba(0,0,0,0.7); letter-spacing: 1px; }
+  .shows { background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url(bg2.jpg) center center/cover no-repeat fixed; padding: 2rem 1rem; }
+  .show-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+  .show-card { background: rgba(0,0,0,0.6); padding: 1rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(255, 59, 129, 0.2); border: 2px solid rgba(255, 59, 129, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .show-card:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(255, 59, 129, 0.3); }
+  .show-card h3 { font-family: 'Anton', sans-serif; font-size: 1.5rem; margin-bottom: 1rem; color: #ff3b81; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); margin-top: 0; }
+  .show-card h4 { font-family: 'Anton', sans-serif; font-size: 1.2rem; margin-bottom: 0.8rem; color: #ff3b81; text-shadow: 1px 1px 3px rgba(0,0,0,0.6); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 0.3rem; font-weight: 700; margin-top: 1rem; }
+  .sub-show { margin-left: 1rem; font-size: 0.95rem; color: #ddd; }
+  .show-card p { margin: 0.3rem 0; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Nishita Saxsena</div>
+  <nav>
+    <a href="#about">About Me</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#shows">Shows</a>
+    <a href="#booking">Booking</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+<section class="hero" id="about">
+  <div class="hero-text">
+    <h1>$EXIEST CAM GIRL</h1>
+    <p>I bring your fantasies to life through exclusive live shows, intimate private sessions, and personalized experiences that will leave you wanting more.</p>
+    <p>Connect with me for playful moments, genuine conversation, and unforgettable adventures — all from the comfort of your screen.</p>
+    <a href="#booking" class="cta">BOOK A PRIVATE SHOW →</a>
+  </div>
+  <div class="hero-image">
+    <div class="grid-overlay"></div>
+    <div class="bubble-list">
+      <div class="bubble teal">PRIVATE SHOWS</div>
+      <div class="bubble yellow">CUSTOM VIDEOS</div>
+      <div class="bubble pink">FANTASY ROLEPLAY</div>
+      <div class="bubble orange">1-ON-1 CHAT</div>
+      <div class="bubble green">EXCLUSIVE GALLERY</div>
+    </div>
+  </div>
+</section>
+<section class="gallery" id="gallery">
+  <h2>Gallery</h2>
+  <div class="gallery-grid">
+    <img src="img1.jpg" alt="Gallery Image 1">
+    <img src="img2.jpg" alt="Gallery Image 2">
+    <img src="img3.jpg" alt="Gallery Image 3">
+    <img src="img4.jpg" alt="Gallery Image 4">
+  </div>
+</section>
+
+<section class="shows" id="shows">
+  <h2 class="section-title">Shows & Prices</h2>
+  <div class="show-list">
+    <div class="show-card"><h3>Normal Video Call</h3><p>₹450 / 5 min</p><p>₹600 / 7 min</p><p>₹800 / 10 min (Dress of your choice)</p></div>
+    <div class="show-card"><h3>Dress & Roleplay</h3><p>₹1150 / 15 min</p><p>₹1600 / 20 min</p><p>₹2200 / 30 min</p></div>
+    <div class="show-card"><h3>Dildo + Condom</h3><p>₹1100 / 10 min</p><p>₹1500 / 15 min</p><p>₹2000 / 20 min</p><p>₹2900 / 30 min</p></div>
+    <div class="show-card"><h3>Dildo + Blowjob</h3><p>₹1900 / 15 min (with lips)</p></div>
+    <div class="show-card">
+      <h3>Summer Special Show</h3>
+      <div class="sub-show"><p>₹1300 / 15 min</p><p>₹1700 / 20 min (Dress of your choice)</p></div>
+      <h4>Milk Bath Show</h4>
+      <div class="sub-show"><p>₹2100 / 21 min</p></div>
+      <h4>Oily Body Show</h4>
+      <div class="sub-show"><p>₹3000 / 30 min</p></div>
+      <h4>Full Body Oil + Dildo</h4>
+      <div class="sub-show"><p>₹4000</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="booking" style="background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url(bg1.jpg) center center/cover no-repeat fixed; padding: 2rem 1rem; text-align: center; color: white;">
+  <h2 style="font-family: 'Anton', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; color: #ff3b81; text-align: center; text-shadow: 2px 2px 6px rgba(0,0,0,0.7); letter-spacing: 1px;">Booking</h2>
+  <p style="font-size: 1.1rem; margin-bottom: 1rem;">For booking, please click and make the payment to one of the following UPI IDs:</p>
+  <ul style="list-style: none; padding: 0; font-size: 1rem;">
+
+    <li style="margin-bottom: 0.5rem;"><strong>UPI ID 1:</strong> <a href="upi://pay?pa=9294527965@ptyes&pn=Nishita%20Saxsena&cu=INR" style="color:#ff3b81;text-decoration:underline;" target="_blank">9294527965@ptyes</a></li>
+    <li style="margin-bottom: 0.5rem;"><strong>UPI ID 2:</strong> <a href="upi://pay?pa=8964086793@ptyes&pn=Nishita%20Saxsena&cu=INR" style="color:#ff3b81;text-decoration:underline;" target="_blank">8964086793@ptyes</a></li>
+  </ul>
+  <p style="margin-top: 1rem; font-size: 1.1rem;">After making the payment, send the payment screenshot to my Telegram:</p>
+  <a href="https://t.me/Nehasaxsen9752245438" style="display: inline-block; color: #ff3b81; font-size: 2rem; text-shadow: 1px 1px 4px rgba(0,0,0,0.7);">
+    <i class="fab fa-telegram-plane"></i>
+  </a>
+</section>
+
+<section class="contact" id="contact" style="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url(bg3.jpg) center center/cover no-repeat fixed; padding: 2rem 1rem; color: white; text-align: center;">
+  <h2 style="font-family: 'Anton', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; color: #ff3b81; text-shadow: 2px 2px 6px rgba(0,0,0,0.7); letter-spacing: 1px;">Contact Me</h2>
+  <p style="font-size: 1.1rem; margin-bottom: 1rem;">Want to chat, collaborate, or have special requests? Get in touch through the following:</p>
+  <div style="font-size: 2rem; display: flex; justify-content: center; gap: 1rem;">
+    <a href="https://instagram.com/nishitasaxsena" style="color: #ff3b81;"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://twitter.com/EshaVer895102" style="color: #ff3b81;"><i class="fa-brands fa-x-twitter"></i></a>
+  </div>
+</section>
+<footer style="background: #000; padding: 1rem; text-align: center;">
+  <p style="margin: 0; font-size: 0.9rem; color: #ccc;">
+    Made by 
+    <a href="https://instagram.com/asshleel.69" target="_blank" style="color: #ff3b81;">
+      <i class="fa-brands fa-instagram" style="font-size: 1.5rem; vertical-align: middle;"></i>
+    </a>
+    <a href="https://t.me/asshleel69" target="_blank" style="color: #ff3b81;">
+      <i class="fa-brands fa-telegram" style="font-size: 1.5rem; vertical-align: middle;"></i>
+    </a>
+  </p>
+</footer>
+
+
+<!-- Font Awesome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
